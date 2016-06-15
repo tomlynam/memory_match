@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-	// on ready, shuffle array of 16 letters, 2 of each A-H
-
 	var arr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 
 						 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
@@ -16,28 +14,33 @@ $(document).ready(function() {
 	}
 
 	shuffle(arr);
-	console.log(arr);
 
-	// each div an id based on index of array
-
-	// on click, add text that according to ID and assign clicked-cell class
+	var num1 = "";
+	var num2 = "";
 
 	$('.grid-cell').click(function(event) {
-		$(this).text(event.target.id).addClass('clicked-cell');
+		$(this).text(arr[event.target.id]).addClass('clicked-cell');
+		$(this).text(arr[event.target.id]).addClass('scrub-cell');
+		if(num1 == "") {
+			num1 = arr[event.target.id];
+			console.log(num1);
+		} else {
+			num2 = arr[event.target.id];
+			console.log(num2);
+		}		
+		if($('.clicked-cell').length % 2 == 0) {
+    	if(num1 == num2) {
+    		alert("It's a match!");
+    		$('.scrub-cell').removeClass('scrub-cell');
+    		num1 = "";
+				num2 = "";
+    	} else {
+    		alert('try again!');
+				$('.scrub-cell').text('').removeClass('clicked-cell');
+				num1 = "";
+				num2 = "";
+    	}
+		};
 	});
-
-	// $('.grid-cell').click(function() {
-	// 	if($(this).hasClass('clicked-cell')) {
-	// 		// remove the class
-	// 		// remove the text
-	// 		$(this).text('').removeClass('clicked-cell');
-	// 	} else {
-	// 		// add the class
-	// 		// add the text
-	// 		$(this).text('clicked').addClass('clicked-cell');
-	// 	}
-
-	// });
-
 
 });
