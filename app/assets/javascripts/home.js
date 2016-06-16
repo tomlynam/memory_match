@@ -20,33 +20,41 @@ $(document).ready(function() {
 
 	$('.grid-cell').click(function(event) {
 		if($(this).hasClass('clicked-cell'))  {
-			console.log('nothing to see here');
 		} else { 
-				$(this).text(arr[event.target.id]).addClass('clicked-cell');
-				$(this).text(arr[event.target.id]).addClass('scrub-cell');
-				if(num1 == "") {
-					num1 = arr[event.target.id];
-					console.log(num1);
-				} else {
-					num2 = arr[event.target.id];
-					console.log(num2);
-				}		
-				if($('.clicked-cell').length == 16) {
-		    	$('.victory').text('YOU WIN!');
-				} else if($('.clicked-cell').length % 2 == 0) {
-		    	if(num1 == num2) {
-		    		alert("It's a match!");
-		    		$('.scrub-cell').removeClass('scrub-cell');
-		    		num1 = "";
-						num2 = "";
-		    	} else {
-		    		alert('try again!');
-						$('.scrub-cell').text('').removeClass('clicked-cell');
-						num1 = "";
-						num2 = "";
-		    	}
-				};
+			$(this).text(arr[event.target.id]).addClass('clicked-cell');
+			$(this).text(arr[event.target.id]).addClass('scrub-cell');
+			assignNums();
 		}
+		checkForWin();
 	});
+
+	function assignNums() {
+		if(num1 == "") {
+			num1 = arr[event.target.id];
+		} else {
+			num2 = arr[event.target.id];
+		};
+	}
+
+	function checkForWin() {
+		if($('.clicked-cell').length == 16) {
+			$('.victory').text('YOU WIN!');
+		} else if($('.clicked-cell').length % 2 == 0) {
+    	checkForMatch();
+		};
+	}
+
+	function checkForMatch() {
+		if(num1 == num2) {
+  		$('.scrub-cell').removeClass('scrub-cell');
+  		num1 = "";
+			num2 = "";
+  	} else {
+  		alert('try again!');
+			$('.scrub-cell').text('').removeClass('clicked-cell');
+			num1 = "";
+			num2 = "";
+  	};
+	}
 
 });
