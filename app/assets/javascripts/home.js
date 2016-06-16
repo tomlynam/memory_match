@@ -31,7 +31,9 @@ $(document).ready(function() {
 					num2 = arr[event.target.id];
 					console.log(num2);
 				}		
-				if($('.clicked-cell').length % 2 == 0) {
+				if($('.clicked-cell').length == 16) {
+		    	$('.victory').text('YOU WIN!');
+				} else if($('.clicked-cell').length % 2 == 0) {
 		    	if(num1 == num2) {
 		    		alert("It's a match!");
 		    		$('.scrub-cell').removeClass('scrub-cell');
